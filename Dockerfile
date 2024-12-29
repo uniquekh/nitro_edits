@@ -19,11 +19,5 @@ RUN apt-get update && apt-get install -y \
 # Copy the rest of the application code into the container
 COPY . .
 
-# Set environment variables if needed
-ENV API_ID=your_api_id
-ENV API_HASH=your_api_hash
-ENV BOT_TOKEN=your_bot_token
-ENV CHAT_ID=your_chat_id
-
 # Command to run the application
 CMD ["python", "main.py"]
