@@ -1,0 +1,5 @@
+google-api-python-client
+instaloader
+moviepy
+pyrogram
+pillow==9.5.0
