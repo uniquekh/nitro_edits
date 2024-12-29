@@ -10,9 +10,10 @@ COPY requirements.txt .
 # Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install ImageMagick
+# Install ImageMagick and ffmpeg
 RUN apt-get update && apt-get install -y \
     imagemagick \
+    ffmpeg \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
