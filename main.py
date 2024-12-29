@@ -71,7 +71,7 @@ def linkdownload(link):
     else:
         return "", "Invalid link!"
 
-def add_watermark(video_path, watermark_image="/path/to/watermark.png", transparency=0.8, width=600, height=180, position=('center', 50)):
+def add_watermark(video_path, watermark_image="", transparency=0.8, width=600, height=180, position=('center', 50)):
     watermarked_folder = "watermarked"
     os.makedirs(watermarked_folder, exist_ok=True)
     output_path = os.path.join(watermarked_folder, f"watermarked_{os.path.basename(video_path)}")
