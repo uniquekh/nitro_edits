@@ -1,5 +1,5 @@
 google-api-python-client
 instaloader
-moviepy
+moviepy==1.0.0
 pyrogram
 pillow==9.5.0
