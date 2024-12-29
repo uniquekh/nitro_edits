@@ -21,10 +21,10 @@ SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 L = Instaloader()
 
 # Telegram bot details
-API_ID = os.getenv('API_ID')
-API_HASH = os.getenv('API_HASH')
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-CHAT_ID = os.getenv('CHAT_ID')
+API_ID = 24271143
+API_HASH = '27be842cb506de9b5520146dfd0ba299'
+BOT_TOKEN = '7462696027:AAGXCFukbzCQB7pRD-1L2TPo9-BY05QT6sQ'
+CHAT_ID = 5702090016
 
 # Initialize Telegram client
 app = Client("youtube_uploader_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
