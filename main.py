@@ -6,7 +6,7 @@ import pickle
 import moviepy.video.fx.all as vfx
 import moviepy.config as mpy_config
 from instaloader import Instaloader, Post
-from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip, concatenate_videoclips
+from moviepy.editor import VideoFileClip, ImageClip, CompositeVideoClip
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
@@ -21,10 +21,10 @@ SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 L = Instaloader()
 
 # Telegram bot details
-API_ID = "your_api_id"
-API_HASH = "your_api_hash"
-BOT_TOKEN = "your_bot_token"
-CHAT_ID = "your_chat_id"
+API_ID = os.getenv('API_ID')
+API_HASH = os.getenv('API_HASH')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
 
 # Initialize Telegram client
 app = Client("youtube_uploader_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
@@ -90,22 +90,6 @@ def add_watermark(video_path, watermark_image="/path/to/watermark.png", transpar
         print(f"Error adding watermark: {e}")
         return None
 
-def merge_intro(video_path, intro_path):
-    uploaded_folder = "uploaded"
-    os.makedirs(uploaded_folder, exist_ok=True)
-    output_path = os.path.join(uploaded_folder, f"final_{os.path.basename(video_path)}")
-
-    try:
-        video = VideoFileClip(video_path)
-        intro = VideoFileClip(intro_path).resize((video.w, video.h)).fadein(1)
-        final_video = concatenate_videoclips([intro, video])
-        final_video.write_videofile(output_path, codec="libx264", audio_codec="aac")
-        print(f"Final video saved to: {output_path}")
-        return output_path
-    except Exception as e:
-        print(f"Error merging intro: {e}")
-        return None
-
 def authenticate_youtube():
     creds = None
     if os.path.exists("nitro_token.pickle"):
@@ -160,12 +144,10 @@ def cleanup_downloads():
 
 # -------- Main Function --------
 if __name__ == "__main__":
-    print("Instagram Video Downloader -> Watermark Adder -> Intro Merging -> YouTube Uploader")
+    print("Instagram Video Downloader -> Watermark Adder -> YouTube Uploader")
 
     with open("links.txt", "r") as file:
         links = file.readlines()
-
-    intro_path = "/path/to/intro_video.mp4"  # Your intro file path
 
     while True:
         for link in links:
@@ -176,24 +158,19 @@ if __name__ == "__main__":
                 if video_path.endswith(".mp4"):
                     watermarked_path = add_watermark(video_path)
                     if watermarked_path:
-                        final_video_path = merge_intro(watermarked_path, intro_path)
-                        
-                        if final_video_path:
-                            upload_to_youtube(
-                                file_path=final_video_path,
-                                title=video_title,
-                                description='''🔥 The thrill of speed. 🏁 Stunning car edits. ✨ Automotive passion.
+                        upload_to_youtube(
+                            file_path=watermarked_path,
+                            title=video_title,
+                            description='''🔥 The thrill of speed. 🏁 Stunning car edits. ✨ Automotive passion.
 🚘 Supercars | 🛠️ Custom builds | 🌟 Epic rides
 🌟 Your gateway to the world of horsepower. 🏎️ Stay driven!
 
 Follow for breathtaking car content and adrenaline-fueled videos! 🚀''',
-                                tags = ["shorts", "car edits", "supercars", "cars", "car videos", "modified cars", "luxury cars", "fast cars", "ytshorts", "reels", "reel", "trendingshorts", "trending", "viral", "car passion", "auto lovers", "car trends", "hypercars", "nitroedits", "speed"],
-                                category_id="2",
-                                privacy_status="public"
-                            )
-                            cleanup_downloads()
-                        else:
-                            print("Failed to merge intro.")
+                            tags = ["shorts", "car edits", "supercars", "cars", "car videos", "modified cars", "luxury cars", "fast cars", "ytshorts", "reels", "reel", "trendingshorts", "trending", "viral", "car passion", "auto lovers", "car trends", "hypercars", "nitroedits", "speed"],
+                            category_id="2",
+                            privacy_status="public"
+                        )
+                        cleanup_downloads()
                     else:
                         print("Failed to add watermark.")
                 else:
