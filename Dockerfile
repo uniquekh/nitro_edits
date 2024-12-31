@@ -17,9 +17,12 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Expose the port that Flask is running on
+EXPOSE 5000
+
 # Copy the rest of the application code into the container
 COPY . .
 
 
 # Command to run the application
-CMD gunicorn app:app & python3 main.py
+CMD ["python", "main.py"]
