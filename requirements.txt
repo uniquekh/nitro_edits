@@ -3,3 +3,4 @@ instaloader
 moviepy==1.0.0
 pyrogram
 pillow==9.5.0
+Flask==2.0.2
