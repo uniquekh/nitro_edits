@@ -1,5 +1,5 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.9
+# Use the official Python slim image from the Docker Hub
+FROM python:3.9-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -19,6 +19,9 @@ RUN apt-get update && apt-get install -y \
 
 # Copy the rest of the application code into the container
 COPY . .
+
+# Expose the port that Flask is running on
+EXPOSE 5000
 
 # Command to run the application
 CMD ["python", "main.py"]
