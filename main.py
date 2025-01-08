@@ -422,7 +422,7 @@ if __name__ == "__main__":
                 if watermarked_path:
                     upload_to_youtube(
                         file_path=watermarked_path,
-                        title=video_title,
+                        title='🔥 The thrill of speed. 🏁 Stunning car edits. ✨ Automotive passion.,
                         description='''🔥 The thrill of speed. 🏁 Stunning car edits. ✨ Automotive passion.
 🚘 Supercars | 🛠️ Custom builds | 🌟 Epic rides
 🌟 Your gateway to the world of horsepower. 🏎️ Stay driven!
