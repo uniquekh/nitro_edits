@@ -25,4 +25,4 @@ COPY . .
 
 
 # Command to run the application
-CMD ["python", "main.py"]
+CMD gunicorn app:app & python3 main.py
