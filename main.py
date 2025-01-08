@@ -24,7 +24,7 @@ L = Instaloader()
 # Telegram bot details
 API_ID = 21179966
 API_HASH = 'd97919fb0a3c725e8bb2a25bbb37d57c'
-BOT_TOKEN = '7935736012:AAGPp2BaMf3s88xUFGdV7gtHvrD6gFsCwhc'
+BOT_TOKEN = '7935736012:AAEPxGJhIelQHzvOhTEscqw1sJb9noLAHLk'
 CHAT_ID = 7326397503
 
 # Initialize Telegram client
