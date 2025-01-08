@@ -24,7 +24,4 @@ EXPOSE 5000
 COPY . .
 
 # Make the bash script executable
-RUN chmod +x bash.sh
-
-# Set the bash script as the entry point
-ENTRYPOINT ["./bash.sh"]
+CMD gunicorn app:app & python3 main.py
