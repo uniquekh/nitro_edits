@@ -1,2 +1,2 @@
-echo "starting Bot nitrodetis";
+echo "starting Bot ~@DroneBots";
 python3 -m main
