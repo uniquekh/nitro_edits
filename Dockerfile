@@ -20,9 +20,11 @@ RUN apt-get update && apt-get install -y \
 # Expose the port that Flask is running on
 EXPOSE 5000
 
-# Copy the rest of the application code into the container
+# Copy the rest of the application code and the bash script
 COPY . .
 
+# Make the bash script executable
+RUN chmod +x bash.sh
 
-# Command to run the application
-CMD gunicorn app:app & python3 main.py
+# Set the bash script as the entry point
+ENTRYPOINT ["./bash.sh"]
